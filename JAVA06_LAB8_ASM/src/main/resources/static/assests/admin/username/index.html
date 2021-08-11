@@ -1,0 +1,214 @@
+<ul class="nav nav-tabs" style="font-variant: small-caps">
+	<li><a data-toggle="tab" data-target="#edit" href="">Product
+			Edition</a></li>
+	<li class="active"><a data-toggle="tab" data-target="#list" href="">List of Productss</a></li>
+</ul>
+<div class="tab-content">
+	<div id="edit" class="tab-pane fade">
+		<div ng-include="'./_form.html'"></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">USER EDITION</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-4 text-center">
+						<label for="image">
+							<img ng-src="/assests/images/{{form.photo}}" style="max-width: 100%; height: 100%;" alt="">
+
+						</label>
+					</div>
+					<div class="col-sm-8">
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<div>Username</div>
+								<input ng-model="form.username"  type = "text" class="form-control">
+							</div>
+							<div class="form-group col-sm-6">
+								<div>Password</div>
+								<input ng-model="form.password" class="form-control">
+							</div>
+							<div class="form-group col-sm-6">
+								<div>Fullname</div>
+								<input ng-model="form.fullname" class="form-control">
+							</div>
+							<div class="form-group col-sm-6">
+								<div>Email</div>
+								<input ng-model="form.email" class="form-control">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<div>Image</div>
+								<input type="file" class="form-control" id="image"
+								onchange="angular.element(this).scope().imageChanged(this.files)">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer text-center">
+			<button ng-click="create()" class="btn btn-primary">
+				<b class="glyphicon glyphicon-plus"></b>Create
+			</button>
+			<button ng-click="update()" class="btn btn-primary">
+				<b class="glyphicon glyphicon-plus"></b>Update
+			</button>
+			<button ng-click="delete(form)" class="btn btn-primary">
+				<b class="glyphicon glyphicon-plus"></b>Delete
+			</button>
+			<button ng-click="reset()" class="btn btn-primary">
+				<b class="glyphicon glyphicon-plus"></b>Reset
+			</button>
+		</div>
+	</div>
+
+
+
+	<div id="list" class="tab-pane fade in active">
+		<div class="panel panel-default">
+			<div class="panel-heading">PRODUCT LIST</div>
+			<table class="table table-condensed">
+				<thead class="bg-success" style="font-variant: small-caps;">
+					<tr>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Fullname</th>
+						<th>Email</th>
+						<th>Photo</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in pager.items">
+						<th>{{item.username}}</th>
+						<th>{{item.password}}</th>
+						<th>{{item.fullname}}</th>
+						<th>{{item.email}}</th>
+						<th>{{item.photo}}</th>
+						<th>
+							<div class="btn-group btn-group-xs">
+								<button ng-click="edit(item)" class="btn btn-warning glyphicon glyphicon-edit"></button>
+								<button ng-click="delete(item)"  class="btn btn-danger glyphicon glyphicon-trash"></button>
+							</div>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+			<div class="panel-footer text-center">
+				<button ng-click="pager.first()" class="btn btn-danger">
+					<b class="glyphicon glyphicon-hand-up"></b>
+				</button>
+				<button ng-click="pager.prev()" class="btn btn-primary">
+					<b class="glyphicon glyphicon-hand-left"></b>
+				</button>
+				<button class="btn btn-success">{{pager.page + 1 }} of {{pager.count}}</button>
+				<button ng-click="pager.next()" class="btn btn-primary">
+					<b class="glyphicon glyphicon-hand-right"></b>
+				</button>
+				<button ng-click="pager.last()" class="btn btn-danger">
+					<b class="glyphicon glyphicon-hand-down"></b>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- <div class="main-panel">
+
+	<div class="content">
+	  <div class="container-fluid">
+	 
+		<div class="card">
+		  <div class="card-header card-header-tabs card-header-primary">
+			<div class="nav-tabs-navigation">
+			  <div class="nav-tabs-wrapper">
+				<ul class="nav nav-tabs" data-tabs="tabs">
+				  <li class="nav-item">
+					<a class="nav-link active" href="#profile" data-toggle="tab">
+					  Form
+					  <div class="ripple-container"></div>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#messages" data-toggle="tab">
+					  Table
+					  <div class="ripple-container"></div>
+					</a>
+				  </li>
+				</ul>
+			  </div>
+			</div>
+		  </div>
+		  <div class="card-body">
+			<div class="tab-content">
+			  <div class="tab-pane active" id="profile">
+
+				<form>
+				  
+				  <div class="row">
+					<div class="col-md-12">
+					  <div class="form-group">
+						<label class="bmd-label-floating">Adress</label>
+						<input type="text" class="form-control">
+					  </div>
+					</div>
+				  </div>
+				 
+				
+				  <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+				  <div class="clearfix"></div>
+				</form>
+			  </div>
+
+			  <div class="tab-pane" id="messages">
+				<table class="table">
+				  <thead class=" text-primary">
+					<th>
+					  ID
+					</th>
+					<th>
+					  Name
+					</th>
+					<th>
+					  Country
+					</th>
+					<th>
+					  City
+					</th>
+					<th>
+					  Salary
+					</th>
+				  </thead>
+
+				  <tbody>
+					<tr>
+					  <td>
+						1
+					  </td>
+					  <td>
+						Dakota Rice
+					  </td>
+					  <td>
+						Niger
+					  </td>
+					  <td>
+						Oud-Turnhout
+					  </td>
+					  <td class="text-primary">
+						$36,738
+					  </td>
+					</tr>
+			
+				  </tbody>
+				</table>
+			  </div>
+
+			  
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+  </div> -->

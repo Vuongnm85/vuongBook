@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+<!--Router-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+
+<body class="container" ng-app="admin-app">
+	<header class="row">
+		<h2 class="alert alert-success">Website Administration</h2>
+	</header>
+	<div class="row">
+		<nav class="navbar navbar-inverse" style="font-variant: small-caps;">
+			<div class="container-fluid">
+				<div class="nav navbar-nav">
+					<ul class="nav navbar-nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="#!product">Sản phẩm</a></li>
+						<li><a href="#!account">Tài khoản</a></li>
+						<li><a href="#!amout">Lượt mua sản phẩm</a></li>
+						<li><a href="#!cate">Thống kê danh mục</a></li>
+						<li><a href="/security/logoff">Sign Out</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<main>
+		<p class="ng-view"></p>
+	</main>
+	<footer>
+		<div class="panel panel-default">
+			<div class="panel-body text-center">
+				<h3>FPT Polytechnic &copy;2021. All rights reserved.</h3>
+			</div>
+		</div>
+	</footer>
+	<script src="./admin-app.js"></script>
+	<script src="./product/product-ctrl.js"></script>
+	<script src="./username/username-ctrl.js"></script>
+	<script src="./thongKe/amount-ctrl.js"></script>
+	<script src="./authority/authority-ctrl.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<div class="panel panel-primary" style="margin-top:10px">
+			<div class="search_box pull-right">
+				
+				<form class="form-inline ml-auto my-2 my-lg-0 mr-3">
+					<div class="input-group" style="width: 520px;">
+						<form th:action="@{|/order/list/searchyear|}">
+							<input name="name" type="text" class="form-control"
+								placeholder="Nhập năm cần tìm..." />
+						</form>
+
+						<div class="input-group-append">
+							<button type="button" class="btn"
+								style="background-color: #CF111A; color: white;">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="panel-heading">YOUR ORDERS PURCHASED</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>Order No.</th>
+						<th>Order Date</th>
+						<th>Shipping Address</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="order,state:${orders}">
+						<td>[[${state.index}]]</td>
+						<td>[[${order.id}]]</td>
+						<td>[[${order.createDate}]]</td>
+						<td>[[${order.address}]]</td>
+						<td><a th:href="@{|/order/detail/${order.id}|}"
+							class="btn btn-default" style="color:green"> Chi tiết
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</main>
+</body>
+
+</html>

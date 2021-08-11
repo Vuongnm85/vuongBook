@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+
+		<!-- giao diện giỏ hàng  -->
+		<section class="content my-3">
+			<div class="container">
+				<div class="cart-page bg-white">
+					<div class="row">
+						<!-- giao diện giỏ hàng khi không có item  -->
+						<div class="col-12 cart-empty d-none">
+							<div class="py-3 pl-3">
+								<h6 class="header-gio-hang">
+									GIỎ HÀNG CỦA BẠN <span>(0 sản phẩm)</span>
+								</h6>
+								<div
+									class="cart-empty-content w-100 text-center justify-content-center">
+									<img src="images/shopping-cart-not-product.png"
+										alt="shopping-cart-not-product">
+									<p>Chưa có sản phẩm nào trong giở hàng của bạn</p>
+								</div>
+							</div>
+						</div>
+						<!-- giao diện giỏ hàng khi có hàng (phần comment màu xanh bên dưới là phần 2 sản phẩm trong giỏ hàng nhưng giờ đã demo bằng jquery) -->
+						<div class="col-md-8 cart">
+							<div class="cart-content py-3 pl-3">
+								<h6 class="header-gio-hang">
+									GIỎ HÀNG CỦA BẠN <span>({{cart.count}} sản phẩm)</span>
+								</h6>
+								<div class="cart-list-items">
+									<div class="cart-item d-flex" ng-repeat="item in cart.items"
+										style="margin-bottom: 10px;">
+										<a href="product-item.html" class="img"> <img
+											th:src="@{|/assests/book/images/{{item.image}}|}"
+											class="img-fluid" alt="anhsp1">
+										</a>
+										<div class="item-caption d-flex w-100">
+											<div class="item-info ml-3">
+												<a href="product-item.html" class="ten">{{item.name}}</a>
+												<div class="soluong d-flex">
+													<div class="input-number input-group mb-3">
+
+														<input class="soluongsp  text-center"
+															ng-change="cart.saveToLocalStorage()" ng-model="item.qty"
+															type="number" min="1">
+													</div>
+												</div>
+											</div>
+
+											<div
+												class="item-price ml-auto d-flex flex-column align-items-end">
+												<div class="giamoi">Giá: {{item.price}}</div>
+												<div class="giamoi">Tổng:
+													{{item.qty*item.price-item.qty*item.price*0.2|number:2}}</div>
+												<div class="giacu">{{item.qty*item.price*0.2|number:2}}
+													₫</div>
+
+
+												<span class="remove mt-auto" ng-click="cart.remove(item.id)"><i
+													class="far fa-trash-alt"></i></span>
+
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-md-3"></div>
+									<div class="col-md-5 offset-md-4">
+										<div class="tonggiatien">
+											<div class="group d-flex justify-content-between">
+												<p class="label">Tạm tính:</p>
+												<p class="tamtinh">328.000 ₫</p>
+											</div>
+											<div class="group d-flex justify-content-between">
+												<p class="label">Giảm giá:</p>
+												<p class="giamgia">0 ₫</p>
+											</div>
+											<div class="group d-flex justify-content-between">
+												<p class="label">Phí vận chuyển:</p>
+												<p class="phivanchuyen">0 ₫</p>
+											</div>
+											<div class="group d-flex justify-content-between">
+												<p class="label">Phí dịch vụ:</p>
+												<p class="phidicvu">0 ₫</p>
+											</div>
+											<div
+												class="group d-flex justify-content-between align-items-center">
+												<strong class="text-uppercase">Tổng cộng:</strong>
+												<p class="tongcong">${{cart.amout-cart.amout*0.2|number:2}}
+													₫</p>
+											</div>
+											<small class="note d-flex justify-content-end text-muted">
+												(Giá đã bao gồm VAT) </small>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- giao diện phần thanh toán nằm bên phải  -->
+						<div class="col-md-4 cart-steps pl-0">
+
+							<div class="card">
+								<div class="panel-heading">ORDER PURCHASING</div>
+								<div class="card-body">
+									<form class="form-diachigiaohang">
+										<div class="form-label-group">
+											Người mua:
+											<div class="form-control" id="username">[[${#request.remoteUser}]]</div>
+										</div>
+										<div class="form-label-group">
+											Ngày mua:
+											<div class="form-control">{{order.createDate | date :
+												'dd-MM-yyyy'}}</div>
+										</div>
+										<div class="form-label-group">
+											<input ng-model="order.address" id="inputAddress"
+												class="form-control" placeholder="Nhập Địa chỉ giao hàng"
+												name="address" required>
+										</div>
+										<div class="panel-footer text-right">
+											<button ng-click="order.purchase()" class="btn btn-success">Purchase</button>
+										</div>
+									</form>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- het div cart-steps  -->
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+	</main>
+</body>
+
+</html>
